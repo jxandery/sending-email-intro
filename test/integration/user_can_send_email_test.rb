@@ -30,10 +30,16 @@ class UserCanSendEmailTest < ActionDispatch::IntegrationTest
 
     assert ActionMailer::Base.deliveries.empty?
 
-    fill_in "email", with: "brettlovescats@gmail.com"
+    fill_in "email", with: "brett@isawesome.com"
     click_on "Submit"
 
     assert_equal 1, ActionMailer::Base.deliveries.count
+
+    mail = ActionMailer::Base.deliveries.last
+
+    assert_equal ['brett@isawesome.com'], mail.to
+    assert_equal "You've Changed.", mail.subject
+    assert_equal "", mail.body.raw_source
   end
 
 end
