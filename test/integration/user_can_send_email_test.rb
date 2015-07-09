@@ -5,6 +5,7 @@ class UserCanSendEmailTest < ActionDispatch::IntegrationTest
 
   def setup
     Capybara.app = YouveChanged::Application
+    reset_session!
   end
 
   def test_loads_homepage
